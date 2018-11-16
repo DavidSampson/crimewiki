@@ -1,0 +1,13 @@
+{{ file }}
+
+<ul>
+  {% for case in cases %}
+  <li><a href="{% url 'cases:detail' case.id %}">{{ case }}</a></li>
+  {% endfor %}
+</ul>
+<h2>Add case</h2>
+<form action="/files/{{ file.id }}/cases" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>

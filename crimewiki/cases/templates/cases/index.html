@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if case_list %}
+    <ul>
+    {% for case in case_list %}
+        <li><a href="{% url 'cases:detail' case.id %}">{{ case }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No cases are available.</p>
+{% endif %}
+<form action="/cases/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

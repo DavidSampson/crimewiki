@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if file_list %}
+    <ul>
+    {% for file in file_list %}
+        <li><a href="{% url 'files:detail' file.id %}">{{ file }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No files are available.</p>
+{% endif %}
+<form action="/files/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

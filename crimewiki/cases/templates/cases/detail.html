@@ -1,0 +1,7 @@
+<h1>{{ case }}</h1>
+
+<ul>
+  {% for file in files %}
+  <li><a href="{% url 'files:detail' file.id %}">{{ file }}</a></li>
+  {% endfor %}
+</ul>
