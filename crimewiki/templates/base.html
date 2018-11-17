@@ -5,8 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Crime Wiki{% endblock %}</title>
+
 </head>
 <body>
+  <nav>
+    {% block navigation %}
+      <ul>
+        <li><a href="{% url 'home:index' %}">Home</a></li>
+        <li><a href="{% url 'cases:index' %}">Cases</a></li>
+        <li><a href="{% url 'files:index' %}">Files</a></li>
+      </ul>
+    {% endblock %}
+  </nav>
   {% block content %}{% endblock %}
 </body>
+{% block scripts %}{% endblock %}
 </html>

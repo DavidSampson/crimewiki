@@ -7,7 +7,14 @@ from .models import Case
 
 def detail(request, case_id):
     case = get_object_or_404(Case, pk=case_id)
-    return render(request, 'cases/detail.html', {'case': case, 'files': case.files.all()})
+    if request.method == 'GET':
+        context = {'case': case, 'files': case.files.all(), 'form': CaseForm(instance=case)}
+        return render(request, 'cases/detail.html', context)
+    elif request.method == 'POST':
+        form = CaseForm(request.POST, request.FILES, instance=case)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(f'/cases/{case_id}')
 
 def index(request):
     if request.method == 'POST':
@@ -17,7 +24,7 @@ def index(request):
             return HttpResponseRedirect('/')
     else:
         form = CaseForm()
-    context = { 
+    context = {
         'case_list': Case.objects.all(),
         'form': form }
     return render(request, 'cases/index.html', context)

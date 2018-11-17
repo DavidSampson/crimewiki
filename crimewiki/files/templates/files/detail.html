@@ -1,5 +1,18 @@
-{{ file }}
+{% extends 'base.html' %}
 
+{% block content %}
+<h1>{{ file.file_path.name }}</h1>
+
+<h2>File type: {{ file.type }}</h2>
+{% if file.type == 'image' %}
+<img src="{{ file.file_path.url }}" alt="{{ file.file_path.name }}"/>
+{% elif file.type == 'video' %}
+<video controls src="{{ file.file_path.url }}"></video>
+{% elif file.type == 'audio' %}
+<audio controls src="{{ file.file_path.url }}"></audio>
+{% else %}
+<a href="{{ file.file_path.url }}">{{ file.file_path.name }}</a>
+{% endif %}
 <ul>
   {% for case in cases %}
   <li><a href="{% url 'cases:detail' case.id %}">{{ case }}</a></li>
@@ -11,3 +24,5 @@
   {{ form }}
   <input type="submit" value="Submit">
 </form>
+
+{% endblock %}
