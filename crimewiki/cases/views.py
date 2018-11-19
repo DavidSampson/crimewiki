@@ -28,5 +28,5 @@ def index(request):
         form = CaseForm()
     context = {
         'case_list': Case.objects.all(),
-        'form': form }
+        'form': form}
     return render(request, 'cases/index.html', context)

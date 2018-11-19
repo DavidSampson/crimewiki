@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block scripts %}
+<script src="{% static 'file-details.js' %}" charset="utf-8"></script>
+{% endblock %}
+
 {% block content %}
 <h1>{{ file.file_path.name }}</h1>
 
 <h2>File type: {{ file.type }}</h2>
 <h2>Owned by: {{ file.owner.username }}</h2>
+<h2>Description:</h2>
+<p>{{ file.description }}</p>
+<h2>Source:</h2>
+<p>{{ file.source }}</p>
 {% if file.type == 'image' %}
 <img src="{{ file.file_path.url }}" alt="{{ file.file_path.name }}"/>
 {% elif file.type == 'video' %}
@@ -22,8 +32,17 @@
 <h2>Add case</h2>
 <form action="/files/{{ file.id }}/cases" method="post">
   {% csrf_token %}
-  {{ form }}
+  {{ case_form }}
   <input type="submit" value="Submit">
 </form>
+<a id="edit-button" href="#">Edit</a>
+<section id="edit-form" style="visibility:hidden;">
+  <form action="/files/{{ file.id }}/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit">
+  </form>
+</section>
+
 
 {% endblock %}

@@ -13,8 +13,21 @@ from .utilities import map_file_to_type
 
 def detail(request, file_id):
     file = get_object_or_404(File, pk=file_id)
-    context = {'file': file, 'cases': file.case_set.all(), 'form': AddCaseForm()}
-    return render(request, 'files/detail.html', context)
+    if request.method == 'GET':
+        context = {
+            'file': file,
+            'cases': file.case_set.all(),
+            'case_form': AddCaseForm(),
+            'form': FileForm(instance=file)
+        }
+        return render(request, 'files/detail.html', context)
+    elif request.method == 'POST':
+        form = FileForm(request.POST, request.FILES, instance=file)
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.owner = request.user
+            file.save()
+            return HttpResponseRedirect(f'/files/{file_id}')
 
 def index(request):
     if request.method == 'POST':
