@@ -9,4 +9,5 @@ def index(request):
         'case_list': Case.objects.all(),
     }
     return render(request, 'index.html', context)
+
     

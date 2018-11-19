@@ -22,12 +22,15 @@ def detail(request, file_id):
         }
         return render(request, 'files/detail.html', context)
     elif request.method == 'POST':
-        form = FileForm(request.POST, request.FILES, instance=file)
-        if form.is_valid():
-            file = form.save(commit=False)
-            file.owner = request.user
-            file.save()
-            return HttpResponseRedirect(f'/files/{file_id}')
+        if file.owner == request.user:
+            form = FileForm(request.POST, request.FILES, instance=file)
+            if form.is_valid():
+                file = form.save(commit=False)
+                file.owner = request.user
+                file.save()
+                return HttpResponseRedirect(f'/files/{file_id}')
+        else:
+            return redirect(settings.LOGIN_URL)
 
 def index(request):
     if request.method == 'POST':
