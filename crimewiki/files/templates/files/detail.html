@@ -4,6 +4,7 @@
 <h1>{{ file.file_path.name }}</h1>
 
 <h2>File type: {{ file.type }}</h2>
+<h2>Owned by: {{ file.owner.username }}</h2>
 {% if file.type == 'image' %}
 <img src="{{ file.file_path.url }}" alt="{{ file.file_path.name }}"/>
 {% elif file.type == 'video' %}

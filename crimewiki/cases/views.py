@@ -13,7 +13,9 @@ def detail(request, case_id):
     elif request.method == 'POST':
         form = CaseForm(request.POST, request.FILES, instance=case)
         if form.is_valid():
-            form.save()
+            case = form.save(commit=False)
+            case.owner = request.user
+            case.save()
             return HttpResponseRedirect(f'/cases/{case_id}')
 
 def index(request):

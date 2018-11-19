@@ -10,6 +10,7 @@
 {% block content %}
 
 <h1>{{ case }}</h1>
+<h2>Owned by: {{ case.owner.username }}</h2>
 <p>
   {{case.description}}
 </p>

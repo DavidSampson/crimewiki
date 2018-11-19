@@ -25,6 +25,7 @@ def index(request):
             if form.is_valid():
                 new_file = form.save(commit=False)
                 new_file.type = map_file_to_type(new_file.file_path.name)
+                new_file.owner = request.user
                 new_file.save()
                 return HttpResponseRedirect('/')
     else:
