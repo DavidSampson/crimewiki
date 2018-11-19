@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.http.response import Http404, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+from files.models import File
+from cases.models import Case
 # Create your views here.
 
 def register(request):
@@ -20,5 +23,9 @@ def index(request):
     pass
 
 def detail(request, user_id):
-    user_detail = get_object_or_404(User, pk=user_id)
-    return render(request, 'users/detail.html', {'user_detail':user_detail})
+    context = {
+        'user_detail': get_object_or_404(User, pk=user_id),
+        'file_list': File.objects.filter(owner=user_id),
+        'case_list': Case.objects.filter(owner=user_id)
+    }
+    return render(request, 'users/detail.html', context)
