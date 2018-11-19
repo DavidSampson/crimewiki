@@ -8,10 +8,10 @@ file_type_dict = {
 file_types = tuple([(f, f) for f in file_type_dict.keys()]+[('other','other')])
 
 def get_file_ending(name):
-    return name.rpartition('.')[-1]
+    return name.rpartition('.')[-1].lower()
 
 def map_file_ending_to_type(ending):
-    for k,v in file_type_dict.items():
+    for k, v in file_type_dict.items():
         if ending in v:
             return k
     return 'other'

@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Crime Wiki{% endblock %}</title>
-
+  {% load static %}
+  {% block stylesheets %} <link rel="stylesheet" href="{% static 'style.css' %}">
+  {% endblock stylesheets %}
 </head>
 <body>
   <nav>
