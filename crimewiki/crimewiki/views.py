@@ -4,8 +4,9 @@ from cases.models import Case
 # Create your views here.
 
 def index(request):
-    context = { 
+    context = {
         'file_list': File.objects.all(),
         'case_list': Case.objects.all(),
     }
-    return render(request, 'home/index.html', context)
+    return render(request, 'index.html', context)
+    

@@ -11,10 +11,22 @@
   <nav>
     {% block navigation %}
       <ul>
-        <li><a href="{% url 'home:index' %}">Home</a></li>
-        <li><a href="{% url 'cases:index' %}">Cases</a></li>
-        <li><a href="{% url 'files:index' %}">Files</a></li>
+        <li>
+          <a href="{% url 'index' %}">Home</a>
+        </li>
+        <li>
+          <a href="{% url 'cases:index' %}">Cases</a>
+        </li>
+        <li>
+          <a href="{% url 'files:index' %}">Files</a>
+        </li>
+        <li>
+          {% block user %}
+            {% include "users/navbar_widget.html" %}
+          {% endblock user %}
+        </li>
       </ul>
+
     {% endblock %}
   </nav>
   {% block content %}{% endblock %}

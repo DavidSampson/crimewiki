@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'cases.apps.CasesConfig',
-    'home.apps.HomeConfig',
+    'users.apps.UsersConfig',
     'files.apps.FilesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'crimewiki.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'crimewiki/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,3 +129,5 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
 
 MEDIAL_URL = '/uploads/'
+
+LOGOUT_REDIRECT_URL = '/'

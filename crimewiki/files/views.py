@@ -1,17 +1,19 @@
+import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404, FileResponse
+
 from crimewiki.settings import MEDIA_ROOT
-import os
 from .forms import FileForm, AddCaseForm
 
 from .models import File
 
 from .utilities import map_file_to_type
-from cases.models import Case
+
 
 def detail(request, file_id):
     file = get_object_or_404(File, pk=file_id)
-    return render(request, 'files/detail.html', {'file': file, 'cases': file.case_set.all(), 'form': AddCaseForm()})
+    context = {'file': file, 'cases': file.case_set.all(), 'form': AddCaseForm()}
+    return render(request, 'files/detail.html', context)
 
 def index(request):
     if request.method == 'POST':
@@ -25,7 +27,7 @@ def index(request):
         form = FileForm()
     context = {
         'file_list': File.objects.all(),
-        'form': form }
+        'form': form}
     return render(request, 'files/index.html', context)
 
 def add_cases(request, file_id):
