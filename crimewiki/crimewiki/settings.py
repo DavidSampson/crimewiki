@@ -131,3 +131,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
 MEDIAL_URL = '/uploads/'
 
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/users/login/'

@@ -1,7 +1,8 @@
 import os
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, FileResponse
-
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from crimewiki.settings import MEDIA_ROOT
 from .forms import FileForm, AddCaseForm
 
@@ -17,12 +18,15 @@ def detail(request, file_id):
 
 def index(request):
     if request.method == 'POST':
-        form = FileForm(request.POST, request.FILES)
-        if form.is_valid():
-            new_file = form.save(commit=False)
-            new_file.type = map_file_to_type(new_file.file_path.name)
-            new_file.save()
-            return HttpResponseRedirect('/')
+        if not request.user.is_authenticated:
+            return redirect(settings.LOGIN_URL)
+        else:
+            form = FileForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_file = form.save(commit=False)
+                new_file.type = map_file_to_type(new_file.file_path.name)
+                new_file.save()
+                return HttpResponseRedirect('/')
     else:
         form = FileForm()
     context = {
@@ -30,6 +34,7 @@ def index(request):
         'form': form}
     return render(request, 'files/index.html', context)
 
+@login_required
 def add_cases(request, file_id):
     if request.method == 'POST':
         file = get_object_or_404(File, pk=file_id)
