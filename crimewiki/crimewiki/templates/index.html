@@ -11,14 +11,14 @@
 {% else %}
     <p>No files are available.</p>
 {% endif %}
-<h1>Cases</h1>
-{% if case_list %}
+<h1>Pages</h1>
+{% if page_list %}
     <ul>
-    {% for case in case_list %}
-        <li><a href="{% url 'cases:detail' case.id %}">{{ case }}</a></li>
+    {% for page in page_list %}
+        <li><a href="{% url 'pages:detail' page.id %}">{{ page }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No cases are available.</p>
+    <p>No pages are available.</p>
 {% endif %}
 {% endblock %}

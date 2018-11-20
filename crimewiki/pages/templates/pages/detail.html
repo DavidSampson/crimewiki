@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block scripts %}
+<script src="{% static 'page-details.js' %}" charset="utf-8"></script>
+{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ page }}</h1>
+<h2>Owned by: {{ page.owner.username }}</h2>
+<p>
+  {{page.description}}
+</p>
+<a id="edit-button" href="#">Edit</a>
+<section id="edit-form" style="visibility:hidden;">
+  <form action="/pagess/{{ page.id }}/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit">
+  </form>
+</section>
+
+{% endblock %}

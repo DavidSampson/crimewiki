@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block scripts %}
+<script src="{% static 'page-index.js' %}" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+{% if page_list %}
+    <ul>
+    {% for page in page_list %}
+        <li><a href="{% url 'pages:detail' page.id %}">{{ page }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No pages are available.</p>
+{% endif %}
+<h2>Page types:</h2>
+<select id="page-type-select">
+    {% for key in forms.keys  %}
+        <option value="{{ key }}">{{ key }}</option>
+    {% endfor %}
+</select>
+
+<button id="add-page-enable">Add page</button>
+
+<section id="page-form" style="visibility:hidden">
+
+</section>
+{% for key, val in forms.items %}
+    <template id="{{ key }}-form">
+        <form id="{{key}}-add-page-form" action="/pages/types/{{key}}/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ val.form }}
+            <input type="submit" value="Submit">
+        </form>
+    </template>
+{% endfor %}
+{% endblock %}

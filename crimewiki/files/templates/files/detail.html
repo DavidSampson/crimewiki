@@ -24,17 +24,6 @@
 {% else %}
 <a href="{{ file.file_path.url }}">{{ file.file_path.name }}</a>
 {% endif %}
-<ul>
-  {% for case in cases %}
-  <li><a href="{% url 'cases:detail' case.id %}">{{ case }}</a></li>
-  {% endfor %}
-</ul>
-<h2>Add case</h2>
-<form action="/files/{{ file.id }}/cases" method="post">
-  {% csrf_token %}
-  {{ case_form }}
-  <input type="submit" value="Submit">
-</form>
 <a id="edit-button" href="#">Edit</a>
 <section id="edit-form" style="visibility:hidden;">
   <form action="/files/{{ file.id }}/" method="post" enctype="multipart/form-data">

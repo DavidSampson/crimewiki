@@ -20,7 +20,7 @@ from . import views
 
 urlpatterns = [
     path('files/', include('files.urls')),
-    path('cases/', include('cases.urls')),
+    path('pages/', include('pages.urls')),
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('', views.index, name="index"),

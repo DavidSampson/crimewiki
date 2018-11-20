@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, Http404, FileResponse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from crimewiki.settings import MEDIA_ROOT
-from .forms import FileForm, AddCaseForm
+from .forms import FileForm
 
 from .models import File
 
@@ -16,8 +16,6 @@ def detail(request, file_id):
     if request.method == 'GET':
         context = {
             'file': file,
-            'cases': file.case_set.all(),
-            'case_form': AddCaseForm(),
             'form': FileForm(instance=file)
         }
         return render(request, 'files/detail.html', context)
@@ -51,19 +49,6 @@ def index(request):
         'form': form}
     return render(request, 'files/index.html', context)
 
-@login_required
-def add_cases(request, file_id):
-    if request.method == 'POST':
-        file = get_object_or_404(File, pk=file_id)
-        form = AddCaseForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            for case in data['cases']:
-                case.files.add(file)
-                case.save()
-            return HttpResponseRedirect(f'/files/{file_id}')
-    else:
-        return Http404()
 
 def file_serve(request, file_id, file_name):
     file = get_object_or_404(File, pk=file_id)

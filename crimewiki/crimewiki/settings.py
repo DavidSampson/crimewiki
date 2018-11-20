@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'cases.apps.CasesConfig',
+    'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
     'files.apps.FilesConfig',
     'django.contrib.admin',
@@ -126,7 +126,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 MEDIAL_URL = '/uploads/'
 
