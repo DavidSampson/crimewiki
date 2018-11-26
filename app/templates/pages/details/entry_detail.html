@@ -1,0 +1,14 @@
+{% extends 'base_detail.html' %}
+
+{% block details %}
+  <h1>{{ object }}</h1>
+  <h2>Owned by: {{ object.owner.username }}</h2>
+  <p>
+    {{object.description}}
+  </p>
+{% endblock details %}
+{% block object %}
+  <p>
+    {{object.content}}
+  </p>
+{% endblock object %}

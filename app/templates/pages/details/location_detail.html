@@ -1,0 +1,19 @@
+{% extends 'base_detail.html' %}
+
+{% block details %}
+  <h1>{{ object }}</h1>
+  <h2>Owned by: {{ object.owner.username }}</h2>
+  <p>
+    {{object.description}}
+  </p>
+{% endblock details %}
+
+{% block object %}
+  <iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key={{ map_api_key }}
+    &q={{ object.place|urlencode }}" allowfullscreen>
+</iframe>
+{% endblock object %}

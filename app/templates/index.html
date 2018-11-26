@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Pages</h1>
+{% if object_list %}
+    <ul>
+    {% for page in object_list %}
+        <li><a href="{% url 'page_detail' page.id %}">{{ page }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No pages are available.</p>
+{% endif %}
+{% endblock %}

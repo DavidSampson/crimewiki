@@ -1,0 +1,24 @@
+{% extends 'base_detail.html' %}
+
+
+{% block details %}
+  <h1>{{ object }}</h1>
+  <h2>Owned by: {{ object.owner.username }}</h2>
+  <p>
+    {{object.description}}
+  </p>
+  <p>
+    {{object.source}}
+  </p>
+{% endblock details %}
+{% block object %}
+  {% if object.type == 'image' %}
+    <img src="{{ object.file_path.url }}" alt="{{ object.file_path.name }}"/>
+  {% elif object.type == 'video' %}
+    <video controls src="{{ object.file_path.url }}"></video>
+  {% elif object.type == 'audio' %}
+    <audio controls src="{{ object.file_path.url }}"></audio>
+  {% else %}
+    <a href="{{ object.file_path.url }}">{{ object.file_path.name }}</a>
+  {% endif %}
+{% endblock object %}
