@@ -113,3 +113,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Static files
+uploads/
+
+# SQLite3 Database
+
+db.sqlite3
+*.sqlite3
+
+# node_modules
+
+**/node_modules/
