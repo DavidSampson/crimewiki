@@ -1,1 +1,1 @@
-editButton.addEventListener('click', e => toggleEl(editForm));
+showButton.addEventListener('click', e => toggleEl(editForm));

@@ -11,7 +11,7 @@ class Page(models.Model):
     owner = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=1)
     objects = InheritanceManager()
     def get_absolute_url(self):
-        return reverse('pages:detail', args=[str(self.id)])
+        return reverse('page_detail', args=[str(self.id)])
     def __str__(self):
         return self.name
     def get_excluded_fields(self):
@@ -20,17 +20,27 @@ class Page(models.Model):
 class Entry(Page):
     content = models.TextField()
 
+class FileCategory(models.Model):
+    name = models.CharField(max_length=200)
+
 class File(Page):
     type = models.CharField(max_length=10, choices=file_types, blank=True)
     source = models.CharField(max_length=200, blank=True)
     file_path = models.FileField()
+    category = models.ForeignKey(FileCategory, on_delete=models.CASCADE, null=True, blank=True)
     def get_excluded_fields(self):
         fields = super().get_excluded_fields()
         fields.append('type')
+        fields.append('category')
         return fields
+
+class FileCollection(Page):
+    files = models.ManyToManyField(File)
 
 class Location(Page):
     place = models.CharField(max_length=200)
+
+
 
 
 PageTypesList = [Entry, File, Location]

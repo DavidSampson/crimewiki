@@ -12,7 +12,7 @@
   {% block object %}
   {% endblock object %}
   {% block edit %}
-    <a id="edit-button" href="#">Edit</a>
+    <a id="show-button" href="#">Edit</a>
     <section id="edit-form" style="visibility:hidden;">
       <form action="{% url 'page_detail' object.id %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
