@@ -1,0 +1,30 @@
+{% extends 'pages/base_detail.html' %}
+
+
+{% block details %}
+  <h1>File collection: {{ object }}</h1>
+  <h2>Owned by: {{ object.owner.username }}</h2>
+  <p>
+    {{object.description}}
+  </p>
+  <p>
+    {{object.source}}
+  </p>
+{% endblock details %}
+{% block object %}
+  {% for file in object.files.all %}
+    <section>
+    <h3>{{ file.name }}</h3>
+    {% if file.type == 'image' %}
+      <img src="{{ file.file_path.url }}" alt="{{ file.file_path.name }}"/>
+    {% elif file.type == 'video' %}
+      <video controls src="{{ file.file_path.url }}"></video>
+    {% elif file.type == 'audio' %}
+      <audio controls src="{{ file.file_path.url }}"></audio>
+    {% else %}
+      <a href="{{ file.file_path.url }}">{{ file.file_path.name }}</a>
+    {% endif %}
+    </section>
+  {% endfor %}
+
+{% endblock object %}

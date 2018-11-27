@@ -1,0 +1,14 @@
+{% extends 'pages/base_detail.html' %}
+{% load pages_extra %}
+
+{% block details %}
+  <h1>{{ object }}</h1>
+  <h2>Owned by: {{ object.owner.username }}</h2>
+  <p>
+    {{object.description}}
+  </p>
+{% endblock details %}
+{% block object %}
+  <a href="{{object.link}}">{{ object.name }}</a>
+  <a href="https://web.archive.org/web/*/{{object.link|strip_protocol}}">Wayback - {{ object.name }}</a>
+{% endblock object %}

@@ -3,14 +3,14 @@
 {% load static %}
 
 {% block scripts %}
-    <script src="{% static '/js/pages/index.js' %}" charset="utf-8"></script>
+    <script src="{% static '/js/pages/list.js' %}" charset="utf-8"></script>
 {% endblock %}
 
 {% block content %}
     {% if object_list %}
         <ul>
             {% for page in object_list %}
-                <li><a href="{% url 'page_detail' page.id %}">{{ page }}</a></li>
+                <li><a href="{% url 'pages:page_detail' page.id %}">{{ page }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
@@ -25,7 +25,7 @@
 
     <button id="show-button">Add page</button>
 
-    <section id="edit-form" style="visibility:hidden">
+    <section id="edit-form" style="display:none;">
 
     </section>
     {% for key, val in forms.items %}

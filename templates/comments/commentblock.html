@@ -1,0 +1,15 @@
+{% if object_list %}
+  {% for comment in object_list %}
+    {% include 'comments/comment.html' with comment=comment only %}
+  {% endfor %}
+{% else %}
+  <p>No comments yet</p>
+{% endif %}
+<button id="add-comment-button">Add comment</button>
+<section id="add-comment-form" style="display:none;">
+  <form action="{% url 'comments:serve' page %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit">
+  </form>
+</section>

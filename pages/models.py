@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.forms import modelform_factory
 from model_utils.managers import InheritanceManager
-from .utilities import file_types
+from pages.utilities import file_types
 
 class Page(models.Model):
     name = models.CharField(max_length=200)
@@ -22,6 +22,11 @@ class Entry(Page):
 
 class FileCategory(models.Model):
     name = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name
+
+class WebResource(Page):
+    link = models.URLField(max_length=200)
 
 class File(Page):
     type = models.CharField(max_length=10, choices=file_types, blank=True)
@@ -43,7 +48,7 @@ class Location(Page):
 
 
 
-PageTypesList = [Entry, File, Location]
+PageTypesList = [Entry, File, Location, FileCollection, WebResource]
 
 PageTypes = {
     t.__name__: {'model': t, 'form': modelform_factory(t, exclude=t().get_excluded_fields())}

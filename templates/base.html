@@ -17,7 +17,10 @@
           <a href="{% url 'home' %}">Home</a>
         </li>
         <li>
-          <a href="{% url 'pages_index' %}">Cases</a>
+          <a href="{% url 'pages:pages_index' %}">Cases</a>
+        </li>
+        <li>
+          <a href="{% url 'users:user_list' %}">Users</a>
         </li>
         <li>
           {% block user %}
@@ -32,8 +35,7 @@
 </body>
 {% block root_scripts %}
   {% load static %}
-  <script src="{% static '/js/selectors.js' %}" charset="utf-8"></script>
-  <script src="{% static '/js/utils.js' %}" charset="utf-8"></script>
+  <script src="{% static '/js/core.js' %}" charset="utf-8"></script>
 {% endblock root_scripts %}
 
 {% block scripts %}{% endblock %}

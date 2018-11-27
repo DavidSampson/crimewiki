@@ -5,7 +5,7 @@
 {% if object_list %}
     <ul>
     {% for page in object_list %}
-        <li><a href="{% url 'page_detail' page.id %}">{{ page }}</a></li>
+        <li><a href="{% url 'pages:page_detail' page.id %}">{{ page }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
