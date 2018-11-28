@@ -1,5 +1,7 @@
 {
   "python.pythonPath": "C:\\Program Files\\Python36\\python.exe",
   "eslint.autoFixOnSave": true,
-  "eslint.run": "onSave"
+  "eslint.run": "onSave",
+  "editor.formatOnSave": true,
+  "python.formatting.autopep8Path": "C:\\Users\\wm6sek\\AppData\\Roaming\\Python\\Python36\\Scripts\\autopep8"
 }
