@@ -3,10 +3,9 @@ from django.urls import reverse
 from django.forms import modelform_factory
 from model_utils.managers import InheritanceManager
 from pages.utilities import file_types
-from crimewiki.mixins import PermissionedObjectMixin
 
 
-class Page(PermissionedObjectMixin, models.Model):
+class Page(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     objects = InheritanceManager()
@@ -41,7 +40,7 @@ class File(Page):
         FileCategory, on_delete=models.CASCADE, null=True, blank=True)
 
     def get_excluded_fields(self):
-        fields = super().get_excluded_fields()
+        fields = []
         fields.append('type')
         fields.append('category')
         return fields
@@ -58,7 +57,6 @@ class Location(Page):
 PageTypesList = [Entry, File, Location, FileCollection, WebResource]
 
 PageTypes = {
-    t.__name__: {'model': t, 'form': modelform_factory(
-        t, exclude=t().get_excluded_fields())}
+    t.__name__: {'model': t, 'form': modelform_factory(t, fields='__all__')}
     for t in PageTypesList
 }

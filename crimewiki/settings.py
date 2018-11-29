@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'crimewiki',
+    'crimewiki_auth.apps.CrimewikiAuthConfig',
     'comments.apps.CommentsConfig',
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
